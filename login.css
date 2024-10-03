@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, sans-serif; /* XP's default font */
+}
+
+body {
+    background-color: #d4d0c8; /* XP's default background color */
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #f0f0f0; /* XP's default window background color */
+    border: 1px solid #808080; /* XP's default window border color */
+    border-radius: 5px; /* XP's default window border radius */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* XP's default window shadow */
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold; /* XP's default font weight */
+    color: #00698f; /* XP's default title color */
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+    font-size: 1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #808080; /* XP's default input border color */
+    font-size: 1rem;
+    background-color: #f0f0f0; /* XP's default input background color */
+    color: #000;
+}
+
+.btn-login, .btn-forgot a{
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border: 1px solid #808080; /* XP's default button border color */
+    background-color: #c0c0c0; /* XP's default button background color */
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px; /* XP's default button border radius */
+}
+
+.btn-login:hover, .btn-forgot:hover {
+    background-color: #aaa; /* XP's default button hover color */
+}
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+
+    .login-form h2 {
+        font-size: 1.25rem;
+    }
+
+    .input-group input {
+        font-size: 0.9rem;
+    }
+
+    .btn-login, .btn-forgot {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Vehicle Details by Color</title>
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tahoma', sans-serif;
+        }
+
+        body {
+            background-color: #C0C0C0;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background: linear-gradient(to bottom, #f0f0f0 0%, #ffffff 100%);
+            border: 2px solid #000080;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px #000000;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #000080;
+            text-shadow: 1px 1px #ffffff;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000080;
+            font-size: 1rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000080;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #000080;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .btn.save {
+            background-color: #e0e0e0;
+            color: #000080;
+        }
+
+        .btn.save:hover {
+            background-color: #d0d0d0;
+        }
+
+        .btn.cancel {
+            background-color: #ff5c5c;
+            color: #ffffff;
+        }
+
+        .btn.cancel:hover {
+            background-color: #ff4040;
+        }
+
+        /* Loading Indicator Styles */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000;
+            font-size: 1.5rem;
+            text-align: center;
+            padding-top: 20%;
+            z-index: 1000;
+        }
+
+        .loading p {
+            font-size: 2rem;
+            color: #000080;
+        }
+
+        /* Results Styling */
+        #results {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .vehicle-details {
+            width: 19%;
+            padding: 15px;
+            background-color: #fff;
+            border: 2px solid #000080;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px #000000;
+            margin-bottom: 10px;
+        }
+
+        .vehicle-details p {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .vehicle-details strong {
+            color: #000080;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .vehicle-details {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vehicle-details {
+                width: 100%;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.25rem;
+            }
+
+            .input-group input {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Get Vehicle Details by Fuel Type</h1>
+        <form id="vehicleForm">
+            <div class="input-group">
+                <label for="color">Enter Vehicle Fuel Type</label>
+                <input type="text" id="fuelUsed" name="fuelUsed" oninput="this.value = this.value.toUpperCase()" required>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn save">Get Details</button>
+            </div>
+        </form>
+        <div id="loading">Loading...</div>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('vehicleForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent the form from refreshing the page
+
+    const fuelUsed = document.getElementById('fuelUsed').value;
+    const loading = document.getElementById('loading');
+    const resultsContainer = document.getElementById('results');
+
+    // Show the loading indicator
+    loading.style.display = 'block';
+
+    try {
+        const response = await fetch('/getvehicledetailsbyfuelused', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ fuelUsed })
+        });
+
+        // Hide the loading indicator
+        loading.style.display = 'none';
+
+        if (response.ok) {
+            const vehicles = await response.json(); // Expect an array of vehicles
+
+            if (vehicles.length > 0) {
+                let resultsHtml = '';
+                vehicles.forEach(vehicle => {
+                    resultsHtml += `
+                        <div class="vehicle-details">
+                            <p><strong>Vehicle Name:</strong> ${vehicle.vehicleName}</p>
+                            <p><strong>Fuel Used:</strong> ${vehicle.fuelUsed || 'N/A'}</p> <!-- Updated key here -->
+                            <p><strong>Registration Number:</strong> ${vehicle.registrationNumber}</p>
+                            <p><strong>Registration Year:</strong> ${vehicle.registrationYear}</p>
+                            <p><strong>Color:</strong> ${vehicle.color}</p>
+                            <p><strong>Tyres:</strong> ${vehicle.tyres}</p>
+                            <p><strong>Owner Name:</strong> ${vehicle.ownerName}</p>
+                            <p><strong>Owner Number:</strong> ${vehicle.ownerNumber}</p>
+                            <p><strong>Owner Address:</strong> ${vehicle.ownerAddress}</p>
+                            <p><strong>Owner Phone:</strong> ${vehicle.ownerPhone}</p>
+                            <p><strong>Chassis Number:</strong> ${vehicle.chassisNumber}</p>
+                        </div>
+                    `;
+                });
+                resultsContainer.innerHTML = resultsHtml;
+            } else {
+                resultsContainer.innerHTML = '<p>No vehicles found with the specified Fuel Type.</p>';
+            }
+        } else {
+            const errorData = await response.json();
+            resultsContainer.innerHTML = `<p style="color:red;">${errorData.message}</p>`;
+        }
+    } catch (error) {
+        loading.style.display = 'none';
+        console.error('Error fetching vehicle details:', error);
+        resultsContainer.innerHTML = `<p style="color:red;">An error occurred while fetching the details.</p>`;
+    }
+});
+
+    </script>
+</body>
+</html>

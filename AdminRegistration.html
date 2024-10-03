@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration </title>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tahoma', sans-serif;
+}
+
+body {
+    background-color: #C0C0C0;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.registration-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #f0f0f0 0%, #ffffff 100%);
+    border: 2px solid #000080;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #000000;
+}
+
+.registration-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #000080;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000080;
+    font-size: 1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000080;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-assign {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border: 1px solid #000080;
+    background-color: #e0e0e0;
+    color: #000080;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.btn-assign:hover {
+    background-color: #d0d0d0;
+}
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+    .registration-container {
+        padding: 15px;
+    }
+
+    .registration-form h2 {
+        font-size: 1.25rem;
+    }
+
+    .input-group input {
+        font-size: 0.9rem;
+    }
+
+    .btn-assign {
+        font-size: 0.9rem;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="registration-container">
+        <form action="/register" method="post" class="registration-form">
+            <h2>Admin Registration</h2>
+            <div class="input-group">
+                <label for="adminname">Admin Name</label>
+                <input type="text" id="adminname" name="adminname" required>
+            </div>
+            <div class="input-group">
+                <label for="username">Username (Remember it for Login)</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password (Remember it for Login)</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="securityquestion">Security Question</label>
+                <input type="text" id="securityquestion" name="securityquestion" required>
+            </div>
+            <div class="input-group">
+                <label for="securityanswer">Security Answer (Keep it Safe)</label>
+                <input type="text" id="securityanswer" name="securityanswer" required>
+            </div>
+            <div class="input-group">
+                <label for="uniquekey">Unique Key (Keep it Safe )</label>
+                <input type="text" id="uniquekey" name="uniquekey" required>
+            </div>
+            <button type="submit" class="btn-assign">Assign Admin</button>
+        </form>
+    </div>
+</body>
+</html>

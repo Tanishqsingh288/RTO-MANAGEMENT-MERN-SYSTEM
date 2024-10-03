@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tahoma', sans-serif;
+}
+
+body {
+    background-color: #C0C0C0;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background: linear-gradient(to bottom, #f0f0f0 0%, #ffffff 100%);
+    border: 2px solid #000080;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #000000;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.25rem; /* Reduced font size */
+    color: #000080;
+    text-shadow: 1px 1px #ffffff;
+}
+
+.vehicle-form .input-group {
+    margin-bottom: 15px;
+}
+
+.vehicle-form .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000080;
+    font-size: 0.875rem; /* Reduced font size */
+}
+
+.vehicle-form .input-group input {
+    width: 100%;
+    padding: 8px; /* Reduced padding */
+    border: 1px solid #000080;
+    border-radius: 4px;
+    font-size: 0.875rem; /* Reduced font size */
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 48%;
+    padding: 8px; /* Reduced padding */
+    font-size: 0.875rem; /* Reduced font size */
+    border: 1px solid #000080;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.btn.save {
+    background-color: #e0e0e0;
+    color: #000080;
+}
+
+.btn.save:hover {
+    background-color: #d0d0d0;
+}
+
+.btn.cancel {
+    background-color: #ff5c5c;
+    color: #ffffff;
+}
+
+.btn.cancel:hover {
+    background-color: #ff4040;
+}
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.125rem; /* Adjusted font size */
+    }
+
+    .vehicle-form .input-group input {
+        font-size: 0.8rem; /* Further reduced font size */
+    }
+
+    .btn {
+        font-size: 0.8rem; /* Further reduced font size */
+    }
+}
